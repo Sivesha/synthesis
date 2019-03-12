@@ -1,5 +1,7 @@
 ﻿module Synthesis
 
+open System.Diagnostics
+
 let abelar a= (12 < a && a < 3097 && a%2=0 )
    // failwith "Not implemented"
 
@@ -85,8 +87,20 @@ let month mm = match mm with
                 |_ -> failwith "Invalid number"
   
 
-let toBinary _ =
-    failwith "Not implemented"
+let toBinary b =
+    let rec binString x y =
+        match x=0 with
+        |true -> y
+        |false ->
+            match x%2 with
+            |0 -> binString (x/2) ("0" + y)
+            |_ -> binString (x/2) ("1" + y)
+    match b < 0 with
+      |true -> failwith "Error, negative integer supplied "
+      |_ ->
+            match b=0 with
+             |true -> "0"
+             |false -> binString b ""
 
 let bizFuzz _ =
     failwith "Not implemented"
